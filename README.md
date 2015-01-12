@@ -1,0 +1,31 @@
+# Thank-you-sign-device
+
+//コンパイル　cc -o thanks20 thanks20.c -lwiringPi//
+
+#include <stdio.h>
+#include <wiringPi.h>
+
+#define BTN_PORT 25		/* GPIO25 */
+#define LED_PORT 4		/* GPIO4 */
+
+int val = 0;
+
+int main (void){
+	int data, i;
+
+//初期化
+if(wiringPiSetupGpio() == -1) return 1;
+pinMode(BTN_PORT, INPUT);
+pinMode(LED_PORT, OUTPUT);
+
+for(;;){
+	val = digitalRead(BTN_PORT);
+	
+	if (val == 1){
+		digitalWrite(LED_PORT, 1); // LEDをオン
+} else {
+	digitalWrite(LED_PORT, 0); //LEDをオフ
+}
+}
+return 0 ;
+}
